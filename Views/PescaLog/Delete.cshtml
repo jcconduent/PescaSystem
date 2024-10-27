@@ -1,0 +1,26 @@
+﻿@model PescaSystem.Models.PescaLog
+
+<h2>Eliminar Pesca</h2>
+
+<h3>¿Está seguro de que desea eliminar este registro?</h3>
+<div>
+    <h4>Pesca:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Día:</dt>
+        <dd>@Model.Dia.ToString("yyyy-MM-dd")</dd>
+        <dt>Barco:</dt>
+        <dd>@Model.Barco</dd>
+        <dt>Capitán:</dt>
+        <dd>@Model.Capitan</dd>
+        <dt>Cliente:</dt>
+        <dd>@Model.Cliente</dd>
+        <!-- Muestra otros campos si es necesario -->
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

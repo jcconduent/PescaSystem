@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PescaSystem.Models.PescaLog>
+
+@{
+    ViewData["Title"] = "Registro de Pesca Diaria";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Nuevo Registro</a>
+</p>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Fecha</th>
+            <th>Barco</th>
+            <th>Capitán</th>
+            <th>Cliente</th>
+            <th>Diesel Consumido (gal)</th>
+            <th>Millas Recorridas</th>
+            <th>Sailfish Raises</th>
+            <th>Sailfish Bites</th>
+            <th>Sailfish Releases</th>
+            <th>Marlin Raises</th>
+            <th>Marlin Bites</th>
+            <th>Marlin Releases</th>
+            <th>Dorado Raises</th>
+            <th>Dorado Bites</th>
+            <th>Dorado Releases</th>
+            <th>Atún Raises</th>
+            <th>Atún Bites</th>
+            <th>Atún Releases</th>
+            <th>Comentario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Dia.ToString("yyyy-MM-dd")</td>
+                <td>@item.Barco</td>
+                <td>@item.Capitan</td>
+                <td>@item.Cliente</td>
+                <td>@item.DieselConsumido</td>
+                <td>@item.MillasRecorridas</td>
+                <td>@item.SailfishRaises</td>
+                <td>@item.SailfishBites</td>
+                <td>@item.SailfishReleases</td>
+                <td>@item.MarlinRaises</td>
+                <td>@item.MarlinBites</td>
+                <td>@item.MarlinReleases</td>
+                <td>@item.DoradoRaises</td>
+                <td>@item.DoradoBites</td>
+                <td>@item.DoradoReleases</td>
+                <td>@item.TunaRaises</td>
+                <td>@item.TunaBites</td>
+                <td>@item.TunaReleases</td>
+                <td>@item.Comentario</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
