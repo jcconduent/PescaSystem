@@ -11,15 +11,15 @@
 
 <form asp-action="Edit">
     <div class="form-group">
-        <label asp-for="Dia" class="control-label"></label>
-        <input asp-for="Dia" class="form-control" type="date" />
-        <span asp-validation-for="Dia" class="text-danger"></span>
+        <label asp-for="Fecha" class="control-label"></label>
+        <input asp-for="Fecha" class="form-control" type="date" />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Barco" class="control-label"></label>
-        <input asp-for="Barco" class="form-control" />
-        <span asp-validation-for="Barco" class="text-danger"></span>
+        <label asp-for="Yate" class="control-label"></label>
+        <input asp-for="Yate" class="form-control" />
+        <span asp-validation-for="Yate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -29,11 +29,164 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Cliente" class="control-label"></label>
-        <input asp-for="Cliente" class="form-control" />
-        <span asp-validation-for="Cliente" class="text-danger"></span>
+        <label asp-for="Grupo" class="control-label"></label>
+        <input asp-for="Grupo" class="form-control" />
+        <span asp-validation-for="Grupo" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label asp-for="VelaFlotados" class="control-label"></label>
+        <input asp-for="VelaFlotados" class="form-control" type="number" />
+        <span asp-validation-for="VelaFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VelaPiques" class="control-label"></label>
+        <input asp-for="VelaPiques" class="form-control" type="number" />
+        <span asp-validation-for="VelaPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VelaLiberados" class="control-label"></label>
+        <input asp-for="VelaLiberados" class="form-control" type="number" />
+        <span asp-validation-for="VelaLiberados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VelaMoscaFlotados" class="control-label"></label>
+        <input asp-for="VelaMoscaFlotados" class="form-control" type="number" />
+        <span asp-validation-for="VelaMoscaFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VelaMoscaPiques" class="control-label"></label>
+        <input asp-for="VelaMoscaPiques" class="form-control" type="number" />
+        <span asp-validation-for="VelaMoscaPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VelaMoscaLiberados" class="control-label"></label>
+        <input asp-for="VelaMoscaLiberados" class="form-control" type="number" />
+        <span asp-validation-for="VelaMoscaLiberados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinAzulFlotados" class="control-label"></label>
+        <input asp-for="MarlinAzulFlotados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinAzulFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinAzulPiques" class="control-label"></label>
+        <input asp-for="MarlinAzulPiques" class="form-control" type="number" />
+        <span asp-validation-for="MarlinAzulPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinAzulLiberados" class="control-label"></label>
+        <input asp-for="MarlinAzulLiberados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinAzulLiberados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinMoscaAzulFlotados" class="control-label"></label>
+        <input asp-for="MarlinMoscaAzulFlotados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaAzulFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinMoscaAzulPiques" class="control-label"></label>
+        <input asp-for="MarlinMoscaAzulPiques" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaAzulPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinMoscaAzulLiberados" class="control-label"></label>
+        <input asp-for="MarlinMoscaAzulLiberados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaAzulLiberados" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MarlinRayadoFlotados" class="control-label"></label>
+        <input asp-for="MarlinRayadoFlotados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinRayadoFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinRayadoPiques" class="control-label"></label>
+        <input asp-for="MarlinRayadoPiques" class="form-control" type="number" />
+        <span asp-validation-for="MarlinRayadoPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinRayadoLiberados" class="control-label"></label>
+        <input asp-for="MarlinRayadoLiberados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinRayadoLiberados" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MarlinMoscaRayadoFlotados" class="control-label"></label>
+        <input asp-for="MarlinMoscaRayadoFlotados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaRayadoFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinMoscaRayadoPiques" class="control-label"></label>
+        <input asp-for="MarlinMoscaRayadoPiques" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaRayadoPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinMoscaRayadoLiberados" class="control-label"></label>
+        <input asp-for="MarlinMoscaRayadoLiberados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinMoscaRayadoLiberados" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MarlinNegroFlotados" class="control-label"></label>
+        <input asp-for="MarlinNegroFlotados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinNegroFlotados" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinNegroPiques" class="control-label"></label>
+        <input asp-for="MarlinNegroPiques" class="form-control" type="number" />
+        <span asp-validation-for="MarlinNegroPiques" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MarlinNegroLiberados" class="control-label"></label>
+        <input asp-for="MarlinNegroLiberados" class="form-control" type="number" />
+        <span asp-validation-for="MarlinNegroLiberados" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dorado" class="control-label"></label>
+        <input asp-for="Dorado" class="form-control" type="number" />
+        <span asp-validation-for="Dorado" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DoradoFly" class="control-label"></label>
+        <input asp-for="DoradoFly" class="form-control" type="number" />
+        <span asp-validation-for="DoradoFly" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Atun" class="control-label"></label>
+        <input asp-for="Atun" class="form-control" type="number" />
+        <span asp-validation-for="Atun" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AtunFly" class="control-label"></label>
+        <input asp-for="AtunFly" class="form-control" type="number" />
+        <span asp-validation-for="AtunFly" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gallos" class="control-label"></label>
+        <input asp-for="Gallos" class="form-control" type="number" />
+        <span asp-validation-for="Gallos" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Wahoo" class="control-label"></label>
+        <input asp-for="Wahoo" class="form-control" type="number" />
+        <span asp-validation-for="Wahoo" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="DieselConsumido" class="control-label"></label>
         <input asp-for="DieselConsumido" class="form-control" type="number" step="0.01" />
@@ -45,79 +198,6 @@
         <input asp-for="MillasRecorridas" class="form-control" type="number" step="0.01" />
         <span asp-validation-for="MillasRecorridas" class="text-danger"></span>
     </div>
-
-    <div class="form-group">
-        <label asp-for="SailfishRaises" class="control-label"></label>
-        <input asp-for="SailfishRaises" class="form-control" type="number" />
-        <span asp-validation-for="SailfishRaises" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="SailfishBites" class="control-label"></label>
-        <input asp-for="SailfishBites" class="form-control" type="number" />
-        <span asp-validation-for="SailfishBites" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="SailfishReleases" class="control-label"></label>
-        <input asp-for="SailfishReleases" class="form-control" type="number" />
-        <span asp-validation-for="SailfishReleases" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="MarlinRaises" class="control-label"></label>
-        <input asp-for="MarlinRaises" class="form-control" type="number" />
-        <span asp-validation-for="MarlinRaises" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="MarlinBites" class="control-label"></label>
-        <input asp-for="MarlinBites" class="form-control" type="number" />
-        <span asp-validation-for="MarlinBites" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="MarlinReleases" class="control-label"></label>
-        <input asp-for="MarlinReleases" class="form-control" type="number" />
-        <span asp-validation-for="MarlinReleases" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="DoradoRaises" class="control-label"></label>
-        <input asp-for="DoradoRaises" class="form-control" type="number" />
-        <span asp-validation-for="DoradoRaises" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="DoradoBites" class="control-label"></label>
-        <input asp-for="DoradoBites" class="form-control" type="number" />
-        <span asp-validation-for="DoradoBites" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="DoradoReleases" class="control-label"></label>
-        <input asp-for="DoradoReleases" class="form-control" type="number" />
-        <span asp-validation-for="DoradoReleases" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TunaRaises" class="control-label"></label>
-        <input asp-for="TunaRaises" class="form-control" type="number" />
-        <span asp-validation-for="TunaRaises" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TunaBites" class="control-label"></label>
-        <input asp-for="TunaBites" class="form-control" type="number" />
-        <span asp-validation-for="TunaBites" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TunaReleases" class="control-label"></label>
-        <input asp-for="TunaReleases" class="form-control" type="number" />
-        <span asp-validation-for="TunaReleases" class="text-danger"></span>
-    </div>
-
     <div class="form-group">
         <label asp-for="Comentario" class="control-label"></label>
         <textarea asp-for="Comentario" class="form-control"></textarea>
