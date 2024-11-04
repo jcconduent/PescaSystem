@@ -87,7 +87,7 @@ namespace PescaSystem.Controllers
                 // Estilo para la fila 2
                 var titleStyle = workbook.CreateCellStyle();
                 var titleFont = workbook.CreateFont();
-                titleFont.FontName = "Calibri";
+                //titleFont.FontName = "Calibri";
                 titleFont.FontHeightInPoints = 18;
                 titleFont.IsBold = true;
                 titleStyle.SetFont(titleFont);
