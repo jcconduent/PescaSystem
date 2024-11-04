@@ -2,18 +2,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Instalar las herramientas necesarias para la instalación de fuentes
+# Instalar herramientas necesarias
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    fontconfig \
-    wget \
-    && apt-get clean
+    apt-get install -y fontconfig && \
+    apt-get clean
 
-# Descargar e instalar Calibri
-RUN wget -O /usr/share/fonts/truetype/calibri.ttf https://example.com/path/to/calibri.ttf && \
-    fc-cache -f -v
-
-COPY Fonts /app/Fonts
+# Copiar la fuente Calibri al contenedor
+COPY Fonts/calibri.ttf /usr/share/fonts/truetype/calibri.ttf
 
 # Copia el archivo .csproj y restaura las dependencias
 COPY *.csproj ./
