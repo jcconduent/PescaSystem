@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<PescaSystem.Models.PescaLog>
+@using System.Text
+
 
 @{
     ViewData["Title"] = "Registro de Pesca Diaria";
@@ -8,36 +10,57 @@
 
 @if (ViewBag.Message != null)
 {
-    <div class="alert alert-warning">@ViewBag.Message</div>
+        <div class="alert alert-warning">@ViewBag.Message</div>
 }
 
 <form method="get" asp-action="Index" class="d-flex align-items-end gap-2 mb-3">
     <div class="form-group mb-0">
-        <label for="Fecha" class="mr-2">Fecha</label>
-        <input type="date" name="Fecha" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["Fecha"]" required />
+        <label for="FFecha" class="mr-2">Fecha</label>
+        <input type="date" name="FFecha" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["FFecha"]" required />
     </div>
     <div class="form-group mb-0">
-        <label for="Yate" class="mr-2">Yate</label>
-        <input type="text" name="Yate" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["Yate"]" />
+        <label for="FFechaHasta" class="mr-2">Fecha Hasta</label>
+        <input type="date" name="FFechaHasta" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["FFechaHasta"]" />
     </div>
     <div class="form-group mb-0">
-        <label for="Capitan" class="mr-2">Capitán</label>
-        <input type="text" name="Capitan" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["Capitan"]" />
+        <label for="FYate" class="mr-2">Yate</label>
+        <select name="FYate" class="form-control form-control-sm" style="width: 120px;">
+            @Html.Raw(TempData["LYate"]?.ToString() ?? "")
+        </select>
+    </div>
+    <div class="form-group mb-0">
+        <label for="FCapitan" class="mr-2">Capitán</label>    
+        <select name="FCapitan" class="form-control form-control-sm" style="width: 120px;">
+            @Html.Raw(TempData["LCapitan"]?.ToString() ?? "")
+        </select>
+    </div>
+        <div class="form-group mb-0">
+        <label for="FGrupo" class="mr-2">Grupo</label>
+        <input type="text" name="FGrupo" class="form-control form-control-sm" style="width: 120px;" value="@Context.Request.Query["FGrupo"]" />
     </div>
     <div class="d-flex gap-2">
         <div class="d-flex align-items-end">
-            <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+            <button type="submit" class="btn btn-primary btn-sm" title="Buscar">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
         <div class="d-flex align-items-end">
-            <button type="submit" formaction="@Url.Action("Create")" class="btn btn-primary btn-sm">Agregar</button>
+            <button type="submit" formaction="@Url.Action("Create")" class="btn btn-primary btn-sm" title="Agregar">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
         <div class="d-flex align-items-end">
-            <button type="submit" formaction="@Url.Action("DownloadExcel")" class="btn btn-primary btn-sm">Descargar</button>
+            <button type="submit" formaction="@Url.Action("DownloadExcel")" class="btn btn-primary btn-sm" title="Descargar a Excel">
+                <i class="fas fa-download"></i>
+            </button>
+        </div>
+        <div class="d-flex align-items-end">
+            <button type="submit" formaction="@Url.Action("Reporte")" class="btn btn-primary btn-sm" title="Reporte PowerPoint">
+                <i class="fas fa-file-alt"></i>
+            </button>
         </div>
     </div>
 </form>
-
-
 
 <table class="table table-bordered">
     <thead class="thead-light">
@@ -82,46 +105,50 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
-                </td>
-                <td>@item.Fecha.ToString("dd-MM-yyyy")</td>
-                <td>@item.Yate</td>
-                <td>@item.Capitan</td>
-                <td>@item.Grupo</td>
-                <td>@item.VelaFlotados</td>
-                <td>@item.VelaPiques</td>
-                <td>@item.VelaLiberados</td>
-                <td>@item.VelaMoscaFlotados</td>
-                <td>@item.VelaMoscaPiques</td>
-                <td>@item.VelaMoscaLiberados</td>
-                <td>@item.MarlinAzulFlotados</td>
-                <td>@item.MarlinAzulPiques</td>
-                <td>@item.MarlinAzulLiberados</td>
-                <td>@item.MarlinMoscaAzulFlotados</td>
-                <td>@item.MarlinMoscaAzulPiques</td>
-                <td>@item.MarlinMoscaAzulLiberados</td>
-                <td>@item.MarlinRayadoFlotados</td>
-                <td>@item.MarlinRayadoPiques</td>
-                <td>@item.MarlinRayadoLiberados</td>
-                <td>@item.MarlinMoscaRayadoFlotados</td>
-                <td>@item.MarlinMoscaRayadoPiques</td>
-                <td>@item.MarlinMoscaRayadoLiberados</td>
-                <td>@item.MarlinNegroFlotados</td>
-                <td>@item.MarlinNegroPiques</td>
-                <td>@item.MarlinNegroLiberados</td>
-                <td>@item.Dorado</td>
-                <td>@item.DoradoFly</td>
-                <td>@item.Atun</td>
-                <td>@item.AtunFly</td>
-                <td>@item.Gallos</td>
-                <td>@item.Wahoo</td>
-                <td>@item.DieselConsumido</td>
-                <td>@item.MillasRecorridas</td>
-                <td>@item.Comentario</td>
-            </tr>
+                <tr>                
+                    <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-FFecha="@TempData["FFecha"]" asp-route-FFechaHasta="@TempData["FFechaHasta"]" asp-route-FYate="@TempData["FYate"]" asp-route-FCapitan="@TempData["FCapitan"]" asp-route-FGrupo="@TempData["FGrupo"]" class="btn btn-success btn-sm" title="Editar">
+                            <i class="fas fa-edit fa-xs"></i>
+                        </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-FFecha="@TempData["FFecha"]" asp-route-FFechaHasta="@TempData["FFechaHasta"]" asp-route-FYate="@TempData["FYate"]" asp-route-FCapitan="@TempData["FCapitan"]" asp-route-FGrupo="@TempData["FGrupo"]" class="btn btn-danger btn-sm" title="Borrar">
+                            <i class="fas fa-trash fa-xs"></i>
+                        </a>
+                    </td>                
+                    <td>@item.Fecha</td>
+                    <td>@item.Yate</td>
+                    <td>@item.Capitan</td>
+                    <td>@item.Grupo</td>
+                    <td>@item.VelaFlotados</td>
+                    <td>@item.VelaPiques</td>
+                    <td>@item.VelaLiberados</td>
+                    <td>@item.VelaMoscaFlotados</td>
+                    <td>@item.VelaMoscaPiques</td>
+                    <td>@item.VelaMoscaLiberados</td>
+                    <td>@item.MarlinAzulFlotados</td>
+                    <td>@item.MarlinAzulPiques</td>
+                    <td>@item.MarlinAzulLiberados</td>
+                    <td>@item.MarlinMoscaAzulFlotados</td>
+                    <td>@item.MarlinMoscaAzulPiques</td>
+                    <td>@item.MarlinMoscaAzulLiberados</td>
+                    <td>@item.MarlinRayadoFlotados</td>
+                    <td>@item.MarlinRayadoPiques</td>
+                    <td>@item.MarlinRayadoLiberados</td>
+                    <td>@item.MarlinMoscaRayadoFlotados</td>
+                    <td>@item.MarlinMoscaRayadoPiques</td>
+                    <td>@item.MarlinMoscaRayadoLiberados</td>
+                    <td>@item.MarlinNegroFlotados</td>
+                    <td>@item.MarlinNegroPiques</td>
+                    <td>@item.MarlinNegroLiberados</td>
+                    <td>@item.Dorado</td>
+                    <td>@item.DoradoFly</td>
+                    <td>@item.Atun</td>
+                    <td>@item.AtunFly</td>
+                    <td>@item.Gallos</td>
+                    <td>@item.Wahoo</td>
+                    <td>@item.DieselConsumido</td>
+                    <td>@item.MillasRecorridas</td>
+                    <td>@item.Comentario</td>
+                </tr>
         }
     </tbody>
 </table>

@@ -8,9 +8,9 @@ namespace PescaSystem.Models
         [BsonId]
         public ObjectId Id { get; set; }
 
-        public DateTime Fecha { get; set; }
-        public required string Yate { get; set; }
-        public required string Capitan { get; set; }
+        public required string Fecha { get; set; }
+        public required string Yate { get; set; } 
+        public required string Capitan { get; set; } 
         public required string Grupo { get; set; }
         public double DieselConsumido { get; set; }
         public double MillasRecorridas { get; set; }

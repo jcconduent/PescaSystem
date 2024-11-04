@@ -20,3 +20,21 @@ html {
 body {
   margin-bottom: 60px;
 }
+.form-control-small {
+    width: 150px; 
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Cambia el número de columnas según sea necesario */
+    gap: 5px; /* Espacio entre columnas */
+    align-items: center; /* Alinea los elementos verticalmente */
+}
+
+ .form-row:not(:first-child) input {
+        width: 80px; /* Ajusta el tamaño según sea necesario */
+ }
+.control-label {
+    font-size: 14px; /* Cambia a la medida que prefieras */
+    font-weight: normal; /* Opcional: ajusta el peso de la fuente si es necesario */
+}
