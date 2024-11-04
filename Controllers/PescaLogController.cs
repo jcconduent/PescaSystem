@@ -75,9 +75,9 @@ namespace PescaSystem.Controllers
                 worksheet.CreateFreezePane(0, 5);
                 // Estilos
                 var headerStyle = workbook.CreateCellStyle();
-                var font = workbook.CreateFont();
-                font.IsBold = true;
-                headerStyle.SetFont(font);
+                //var font = workbook.CreateFont();
+                //font.IsBold = true;
+                //headerStyle.SetFont(font);
                 headerStyle.Alignment = HorizontalAlignment.Center;
                 headerStyle.BorderTop = BorderStyle.Thin;
                 headerStyle.BorderBottom = BorderStyle.Thin;
@@ -86,11 +86,11 @@ namespace PescaSystem.Controllers
 
                 // Estilo para la fila 2
                 var titleStyle = workbook.CreateCellStyle();
-                var titleFont = workbook.CreateFont();
+                //var titleFont = workbook.CreateFont();
                 //titleFont.FontName = "Calibri";
-                titleFont.FontHeightInPoints = 18;
-                titleFont.IsBold = true;
-                titleStyle.SetFont(titleFont);
+                //titleFont.FontHeightInPoints = 18;
+                //titleFont.IsBold = true;
+                //titleStyle.SetFont(titleFont);
                 titleStyle.Alignment = HorizontalAlignment.Center;
                 titleStyle.VerticalAlignment = VerticalAlignment.Center;
 
