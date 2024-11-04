@@ -2,6 +2,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
+COPY C:/Windows/Fonts /usr/share/fonts/
+
 # Copia el archivo .csproj y restaura las dependencias
 COPY *.csproj ./
 RUN dotnet restore
