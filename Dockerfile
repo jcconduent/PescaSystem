@@ -10,6 +10,9 @@ RUN apt-get update && \
 # Copiar la fuente Calibri al contenedor
 COPY Fonts/calibri.ttf /usr/share/fonts/truetype/calibri.ttf
 
+# Actualizar la caché de fuentes
+RUN fc-cache -f -v
+
 # Copia el archivo .csproj y restaura las dependencias
 COPY *.csproj ./
 RUN dotnet restore
