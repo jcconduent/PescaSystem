@@ -2,11 +2,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-RUN apt-get -y install fontconfig
-COPY ./fonts ~/.fonts
-COPY ./fonts /usr/shared/fonts
-COPY ./fonts /usr/local/share/fonts/
-# refresh system font cache
+# Instalar fontconfig para manejar las fuentes
+RUN apt-get update && apt-get install -y fontconfig && apt-get clean
+
+# Copiar las fuentes al contenedor en las rutas estándar de Linux
+COPY ./fonts/*.ttf /usr/share/fonts/truetype/
+COPY ./fonts/*.ttf /usr/local/share/fonts/
+
+# Actualizar la caché de fuentes para que el sistema reconozca las fuentes copiadas
 RUN fc-cache -f -v
 
 # Copia el archivo .csproj y restaura las dependencias
