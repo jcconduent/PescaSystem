@@ -2,14 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Instalar fontconfig para manejar las fuentes
-RUN apt-get update && apt-get install -y fontconfig && apt-get clean
-
-# Copiar las fuentes al contenedor en las rutas estándar de Linux
-COPY ./fonts/*.ttf /usr/share/fonts/truetype/
-COPY ./fonts/*.ttf /usr/local/share/fonts/
-
-# Actualizar la caché de fuentes para que el sistema reconozca las fuentes copiadas
+RUN sed -i 's/^Components: main$/& contrib/' /etc/apt/sources.list.d/debian.sources
+RUN apt-get update
+RUN apt-get install -y ttf-mscorefonts-installer fontconfig
 RUN fc-cache -f -v
 
 # Copia el archivo .csproj y restaura las dependencias
