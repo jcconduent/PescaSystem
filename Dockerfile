@@ -3,12 +3,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 RUN apt-get -y install fontconfig
-COPY fonts ~/.fonts
-COPY fonts /usr/shared/fonts
+COPY ./fonts ~/.fonts
+COPY ./fonts /usr/shared/fonts
+COPY ./fonts /usr/local/share/fonts/
 # refresh system font cache
-RUN fc-cache -f -v
-
-# Actualizar la caché de fuentes para que el sistema reconozca Calibri
 RUN fc-cache -f -v
 
 # Copia el archivo .csproj y restaura las dependencias

@@ -85,14 +85,14 @@ namespace PescaSystem.Controllers
                 //headerStyle.BorderRight = BorderStyle.Thin;
 
                 // Estilo para la fila 2
-                var titleStyle = workbook.CreateCellStyle();
+                //var titleStyle = workbook.CreateCellStyle();
                 //var titleFont = workbook.CreateFont();
                 //titleFont.FontName = "Calibri";
                 //titleFont.FontHeightInPoints = 18;
                 //titleFont.IsBold = true;
                 //titleStyle.SetFont(titleFont);
-                titleStyle.Alignment = HorizontalAlignment.Center;
-                titleStyle.VerticalAlignment = VerticalAlignment.Center;
+                //titleStyle.Alignment = HorizontalAlignment.Center;
+                //titleStyle.VerticalAlignment = VerticalAlignment.Center;
 
                 // Estilo para celdas de datos
                 //var dataStyle = workbook.CreateCellStyle();
@@ -105,7 +105,7 @@ namespace PescaSystem.Controllers
                 var fila2 = worksheet.CreateRow(1);
                 fila2.CreateCell(0).SetCellValue("Estadística de Pesca, Pacific Fins");
                 worksheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 0, 33));
-                fila2.GetCell(0).CellStyle = titleStyle;
+                //fila2.GetCell(0).CellStyle = titleStyle;
 
                 // Fila de encabezados combinados
                 var fila4 = worksheet.CreateRow(3);
