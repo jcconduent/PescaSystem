@@ -2,15 +2,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Instalar herramientas y fuentes necesarias
+# Instalar fontconfig para manejar las fuentes
 RUN apt-get update && \
-    apt-get install -y fontconfig ttf-mscorefonts-installer && \
+    apt-get install -y fontconfig && \
     apt-get clean
 
 # Copiar la fuente Calibri al contenedor
-COPY Fonts/calibri.ttf /usr/share/fonts/truetype/msttcorefonts/
+COPY Fonts/calibri.ttf /usr/share/fonts/truetype/calibri/
 
-# Actualizar la caché de fuentes
+# Actualizar la caché de fuentes para que el sistema reconozca Calibri
 RUN fc-cache -f -v
 
 # Copia el archivo .csproj y restaura las dependencias
@@ -31,4 +31,5 @@ COPY --from=build /app/publish .
 # Expone el puerto 80
 EXPOSE 80
 ENTRYPOINT ["dotnet", "PescaSystem.dll"]
+
 
