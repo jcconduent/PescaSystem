@@ -74,15 +74,15 @@ namespace PescaSystem.Controllers
                 var worksheet = workbook.CreateSheet("Registro de Pesca");
                 worksheet.CreateFreezePane(0, 5);
                 // Estilos
-                var headerStyle = workbook.CreateCellStyle();
+                //var headerStyle = workbook.CreateCellStyle();
                 //var font = workbook.CreateFont();
                 //font.IsBold = true;
                 //headerStyle.SetFont(font);
-                headerStyle.Alignment = HorizontalAlignment.Center;
-                headerStyle.BorderTop = BorderStyle.Thin;
-                headerStyle.BorderBottom = BorderStyle.Thin;
-                headerStyle.BorderLeft = BorderStyle.Thin;
-                headerStyle.BorderRight = BorderStyle.Thin;
+                //headerStyle.Alignment = HorizontalAlignment.Center;
+                //headerStyle.BorderTop = BorderStyle.Thin;
+                //headerStyle.BorderBottom = BorderStyle.Thin;
+                //headerStyle.BorderLeft = BorderStyle.Thin;
+                //headerStyle.BorderRight = BorderStyle.Thin;
 
                 // Estilo para la fila 2
                 var titleStyle = workbook.CreateCellStyle();
@@ -95,11 +95,11 @@ namespace PescaSystem.Controllers
                 titleStyle.VerticalAlignment = VerticalAlignment.Center;
 
                 // Estilo para celdas de datos
-                var dataStyle = workbook.CreateCellStyle();
-                dataStyle.BorderTop = BorderStyle.Thin;
-                dataStyle.BorderBottom = BorderStyle.Thin;
-                dataStyle.BorderLeft = BorderStyle.Thin;
-                dataStyle.BorderRight = BorderStyle.Thin;
+                //var dataStyle = workbook.CreateCellStyle();
+                //dataStyle.BorderTop = BorderStyle.Thin;
+                //dataStyle.BorderBottom = BorderStyle.Thin;
+                //dataStyle.BorderLeft = BorderStyle.Thin;
+                //dataStyle.BorderRight = BorderStyle.Thin;
 
                 // Crear fila de título con el nuevo estilo
                 var fila2 = worksheet.CreateRow(1);
@@ -121,7 +121,7 @@ namespace PescaSystem.Controllers
                     {
                         var cell = fila4.CreateCell(i);
                         cell.SetCellValue(i == startCol ? title : ""); // Solo poner texto en la primera celda
-                        cell.CellStyle = headerStyle;
+                     //   cell.CellStyle = headerStyle;
                     }
                     startCol += 3;
                 }
@@ -141,7 +141,7 @@ namespace PescaSystem.Controllers
                 {
                     var cell = fila5.CreateCell(i);
                     cell.SetCellValue(headers[i]);
-                    cell.CellStyle = headerStyle;
+                    //cell.CellStyle = headerStyle;
                 }
 
                 // Llenar los datos comenzando en la fila 6
@@ -185,10 +185,10 @@ namespace PescaSystem.Controllers
                     row.CreateCell(33).SetCellValue(item.Comentario);
 
                     // Aplicar estilo con bordes a las celdas de datos
-                    for (int i = 0; i < headers.Length; i++)
-                    {
-                        row.GetCell(i).CellStyle = dataStyle;
-                    }
+                    //for (int i = 0; i < headers.Length; i++)
+                    //{
+                    //    row.GetCell(i).CellStyle = dataStyle;
+                    //}
                 }
 
                 for (int i = 0; i < headers.Length; i++)
