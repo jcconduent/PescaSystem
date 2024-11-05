@@ -195,7 +195,11 @@ namespace PescaSystem.Controllers
                 {
                     //worksheet.AutoSizeColumn(i);
                 }
+                worksheet.SetColumnWidth(0, 12 * 256);
                 worksheet.SetColumnWidth(1, 12 * 256);
+                worksheet.SetColumnWidth(2, 24 * 256);
+                worksheet.SetColumnWidth(3, 20 * 256);
+                worksheet.SetColumnWidth(33, 100 * 256);
                 using (memoryStream)
                 {
                     workbook.Write(memoryStream);
