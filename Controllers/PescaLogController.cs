@@ -193,7 +193,7 @@ namespace PescaSystem.Controllers
 
                 for (int i = 0; i < headers.Length; i++)
                 {
-                    //worksheet.AutoSizeColumn(i);
+                    worksheet.AutoSizeColumn(i);
                 }
                 using (memoryStream)
                 {
