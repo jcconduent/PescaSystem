@@ -15,6 +15,9 @@ using DocumentFormat.OpenXml;
 using SharpCompress.Common;
 using System.Text;
 using NPOI.SS.Formula.Functions;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using Path = System.IO.Path;
+using NPOI.XWPF.UserModel;
 
 namespace PescaSystem.Controllers
 {
@@ -316,6 +319,71 @@ namespace PescaSystem.Controllers
             }
             return optionsCapitan;
         }
+        public void ImportFromExcel(string filePath)
+        {
+            using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                var workbook = new XSSFWorkbook(file);
+                var sheet = workbook.GetSheetAt(0); // Cambia el índice si es necesario
+
+                var pescaLogs = new List<PescaLog>();
+
+                for (int row = 6; row <= sheet.LastRowNum; row++) 
+                {
+                    var currentRow = sheet.GetRow(row);
+                    if (currentRow == null)
+                    {
+                        break;
+                    }
+                    else if (currentRow.GetCell(1) == null)
+                    {
+                        break;
+                    } else if (string.IsNullOrWhiteSpace(currentRow.GetCell(1).ToString())) {
+                        break;                     
+                    }
+                var pescaLog = new PescaLog
+                {
+                        Fecha = currentRow.GetCell(1)?.StringCellValue ?? string.Empty,
+                        Yate = currentRow.GetCell(2)?.StringCellValue ?? string.Empty,
+                        Grupo = currentRow.GetCell(3)?.StringCellValue ?? string.Empty,
+                        VelaFlotados = (int)(currentRow.GetCell(4)?.NumericCellValue ?? 0),
+                        VelaPiques = (int)(currentRow.GetCell(5)?.NumericCellValue ?? 0),
+                        VelaLiberados = (int)(currentRow.GetCell(6)?.NumericCellValue ?? 0),
+                        VelaMoscaFlotados = (int)(currentRow.GetCell(8)?.NumericCellValue ?? 0),
+                        VelaMoscaPiques = (int)(currentRow.GetCell(9)?.NumericCellValue ?? 0),
+                        VelaMoscaLiberados = (int)(currentRow.GetCell(10)?.NumericCellValue ?? 0),
+                        MarlinAzulFlotados = (int)(currentRow.GetCell(12)?.NumericCellValue ?? 0),
+                        MarlinAzulPiques = (int)(currentRow.GetCell(13)?.NumericCellValue ?? 0),
+                        MarlinAzulLiberados = (int)(currentRow.GetCell(14)?.NumericCellValue ?? 0),
+                        MarlinMoscaAzulFlotados = (int)(currentRow.GetCell(16)?.NumericCellValue ?? 0),
+                        MarlinMoscaAzulPiques = (int)(currentRow.GetCell(17)?.NumericCellValue ?? 0),
+                        MarlinMoscaAzulLiberados = (int)(currentRow.GetCell(18)?.NumericCellValue ?? 0),
+                        MarlinRayadoFlotados = (int)(currentRow.GetCell(20)?.NumericCellValue ?? 0),
+                        MarlinRayadoPiques = (int)(currentRow.GetCell(21)?.NumericCellValue ?? 0),
+                        MarlinRayadoLiberados = (int)(currentRow.GetCell(22)?.NumericCellValue ?? 0),
+                        MarlinMoscaRayadoFlotados = (int)(currentRow.GetCell(24)?.NumericCellValue ?? 0),
+                        MarlinMoscaRayadoPiques = (int)(currentRow.GetCell(25)?.NumericCellValue ?? 0),
+                        MarlinMoscaRayadoLiberados = (int)(currentRow.GetCell(26)?.NumericCellValue ?? 0),
+                        MarlinNegroFlotados = (int)(currentRow.GetCell(28)?.NumericCellValue ?? 0),
+                        MarlinNegroPiques = (int)(currentRow.GetCell(29)?.NumericCellValue ?? 0),
+                        MarlinNegroLiberados = (int)(currentRow.GetCell(30)?.NumericCellValue ?? 0),
+                        Dorado = (int)(currentRow.GetCell(32)?.NumericCellValue ?? 0),
+                        DoradoFly = (int)(currentRow.GetCell(34)?.NumericCellValue ?? 0),
+                        Atun = (int)(currentRow.GetCell(36)?.NumericCellValue ?? 0),
+                        AtunFly = (int)(currentRow.GetCell(37)?.NumericCellValue ?? 0),
+                        Gallos = (int)(currentRow.GetCell(38)?.NumericCellValue ?? 0),
+                        Wahoo = (int)(currentRow.GetCell(39)?.NumericCellValue ?? 0),
+                        DieselConsumido = currentRow.GetCell(40)?.NumericCellValue ?? 0,
+                        MillasRecorridas = currentRow.GetCell(41)?.NumericCellValue ?? 0,
+                        Comentario = currentRow.GetCell(42)?.StringCellValue ?? string.Empty,
+                        Capitan = currentRow.GetCell(43)?.StringCellValue ?? string.Empty,
+                    };
+                    pescaLog.Fecha = pescaLog.Fecha[^4..] + "-" + pescaLog.Fecha[3..5] + "-" + pescaLog.Fecha[0..2];
+                    pescaLogs.Add(pescaLog);
+                }
+                _context.PescaLogs.InsertMany(pescaLogs); // Inserta todos los registros en la base de datos
+            }
+        }
         public IActionResult Index(string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan, string? FGrupo)
         {
             TempData["LYate"] = ListaDeYates(FYate?? "");
@@ -407,5 +475,34 @@ namespace PescaSystem.Controllers
             MemoryStream memoryStream = ArmarWorkBook(query);
             return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "RegistroDePesca.xlsx");
         }
+        [HttpPost]
+        public IActionResult UploadExcel(IFormFile file)
+        {
+            // Genera un nombre único para evitar colisiones y guárdalo en una carpeta temporal
+            var tempFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var tempPath = System.IO.Path.Combine(Path.GetTempPath(), tempFileName);
+
+            try
+            {
+                using (var stream = new FileStream(tempPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                // Llama al método de importación con el nombre del archivo temporal
+                ImportFromExcel(tempPath);
+            }
+            finally
+            {
+                // Elimina el archivo temporal después de importarlo
+                if (System.IO.File.Exists(tempPath))
+                {
+                    System.IO.File.Delete(tempPath);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
