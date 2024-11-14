@@ -386,6 +386,10 @@ namespace PescaSystem.Controllers
         }
         public IActionResult Index(string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan, string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             TempData["LYate"] = ListaDeYates(FYate?? "");
             TempData["LCapitan"] = ListaDeCapitanes(FCapitan?? "");
             TempData["FFecha"] = FFecha;
@@ -399,6 +403,10 @@ namespace PescaSystem.Controllers
 
         public IActionResult Create(string FFecha, string? FFechaHasta, string FYate, string FCapitan, string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             TempData["LYate"] = ListaDeYates(FYate);
             TempData["LCapitan"] = ListaDeCapitanes(FCapitan);
             TempData["FFecha"] = FFecha;
@@ -412,12 +420,20 @@ namespace PescaSystem.Controllers
         [HttpPost]
         public IActionResult Create(PescaLog pescaLog, string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan, string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             _context.PescaLogs.InsertOne(pescaLog);
             return RedirectToAction(nameof(Index), new { FFecha, FFechaHasta, FYate, FCapitan, FGrupo });
         }
 
         public IActionResult Edit(string id, string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan, string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             var log = _context.PescaLogs.Find(log => log.Id == ObjectId.Parse(id)).FirstOrDefault();
             TempData["LYate"] = ListaDeYates(log.Yate);
             TempData["LCapitan"] = ListaDeCapitanes(log.Capitan);
@@ -432,12 +448,20 @@ namespace PescaSystem.Controllers
         [HttpPost]
         public IActionResult Edit(PescaLog pescaLog, string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan , string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             _context.PescaLogs.ReplaceOne(log => log.Id == pescaLog.Id, pescaLog);
             return RedirectToAction(nameof(Index), new { FFecha, FFechaHasta, FYate, FCapitan, FGrupo });
         }
 
         public IActionResult Delete(string id, string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan , string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             TempData["FFecha"] = FFecha;
             TempData["FFechaHasta"] = FFechaHasta;
             TempData["FYate"] = FYate;
@@ -455,6 +479,10 @@ namespace PescaSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(string id, string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan , string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             var result = _context.PescaLogs.DeleteOne(log => log.Id == ObjectId.Parse(id));
             if (result.DeletedCount == 0)
             {
@@ -465,12 +493,20 @@ namespace PescaSystem.Controllers
 
         public IActionResult Reporte(string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan , string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             IQueryable<PescaLog> query = BuscarRegistros(FFecha, FFechaHasta, FYate, FCapitan, FGrupo);
             byte[] data = GenerarReporte(query,FFecha, FFechaHasta);
             return File(data, "application/vnd.openxmlformats-officedocument.presentationml.presentation", "presentacion_editada.pptx");
         }
         public IActionResult DownloadExcel(string? FFecha, string? FFechaHasta, string? FYate, string? FCapitan , string? FGrupo)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             IQueryable<PescaLog> query = BuscarRegistros(FFecha, FFechaHasta, FYate, FCapitan, FGrupo);
             MemoryStream memoryStream = ArmarWorkBook(query);
             return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "RegistroDePesca.xlsx");
@@ -478,6 +514,10 @@ namespace PescaSystem.Controllers
         [HttpPost]
         public IActionResult UploadExcel(IFormFile file)
         {
+            if (HttpContext.Session.GetString("UsuarioId") == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             // Genera un nombre único para evitar colisiones y guárdalo en una carpeta temporal
             var tempFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
             var tempPath = System.IO.Path.Combine(Path.GetTempPath(), tempFileName);

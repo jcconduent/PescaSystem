@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using PescaSystem.Data;
+using PescaSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(); // Habilitar sesiones
+
+// Registrar MongoDbContext y UsuarioService en la inyección de dependencias
+builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 
@@ -29,4 +35,5 @@ app.MapControllerRoute(
     pattern: "{controller=PescaLog}/{action=Index}/{id?}");
 
 app.Run();
+
 

@@ -14,6 +14,8 @@ namespace PescaSystem.Data
         }
 
         public IMongoCollection<PescaLog> PescaLogs => _database.GetCollection<PescaLog>("PescaLogs");
+        public IMongoCollection<Usuario> Usuarios => _database.GetCollection<Usuario>("Usuarios");
+
     }
 }
 
